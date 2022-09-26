@@ -27,10 +27,10 @@ Be sure to add the host that you supplied via --hostname and as the PCE_FQDN in
 your /etc/hosts file.
 
 On OSX this is /private/etc/hosts and the entry should look like this:
-
+```
   127.0.0.1   pce-container.illumio.consulting
   10.0.12.201 pce-container.illumio.consulting
-
+```
 Note: If you have a registered domain and then you can add (A Record DNS type) for the PCE FQDN, and then you don't have to edit your local host file
 
 ## Runtime configuration
@@ -41,21 +41,21 @@ environment variables via the batch option of illumio-pce-env setup --batch
 ### Environment variables
 
 #### Mandatory environment variables
-
+```
 * PCE_FQDN - the PCE FQDN used in the configuration. Be sure to also set the docker hostname to this with --hostname
 * PCE_EMAIL_ADDRESS - the email address to use when sending mails and the initial user for the PCE
 * PCE_FULLNAME - full name of the initial user
 * PCE_PASSWORD - the password to use for the initial user
 * PCE_ORG_NAME - the name of the initial org
-
+```
 Optional environment variables
-
+```
 * PCE_SERVICE_DISCOVERY_FQDN (default: $PCE_FQDN)
 * PCE_FRONTEND_HTTPS_PORT (default: 8443)
 * PCE_FRONTEND_EVENT_SERVICE_PORT (default: 8444)
 * PCE_FRONTEND_MANAGEMENT_HTTPS_PORT (default: 8443) (This is to access the PCE web portal, can be configered Example 6443)
 * PCE_SYSLOG_EVENT_EXPORT_FORMAT (default: json)
-
+```
 
 
 
@@ -74,7 +74,7 @@ PCE works without it and should be running fine without using privileged.
 docker run --privileged -it -d -p 8443:8443 -p 8444:8444 -p 6443:6443 -e PCE_FQDN="pce-container.illumio.consulting" -e PCE_SERVICE_DISCOVERY_FQDN="pce-container.illumio.consulting" -e PCE_EMAIL_ADDRESS="anas.hamra@illumio.com" -e PCE_FULLNAME="Anas Hamra" -e PCE_PASSWORD="Illuminated1" -e PCE_ORG_NAME=Illumio --hostname pce-container.illumio.consulting --name pce ansred/illumio-docker-pce-amd64
 
 * Multiple lines:
-
+```
 docker run --rm --privileged -it -d -p 8443:8443 -p 8444:8444 -p 6443:6443 \
           -e PCE_FQDN="pce-container.illumio.consulting" \
           -e PCE_SERVICE_DISCOVERY_FQDN="pce-container.illumio.consulting" \
@@ -86,7 +86,7 @@ docker run --rm --privileged -it -d -p 8443:8443 -p 8444:8444 -p 6443:6443 \
           --hostname pce-container.illumio.consulting \
           --name pce \
           ansred/illumio-docker-pce-amd64
-
+```
 
 Explanation:
 
@@ -104,24 +104,24 @@ Explanation:
 
 * Tip # To save you from passing all the variables via environment variables you can
 also create a env.list file like the one supplied with this package and use:
-
+```
 docker run -it -d -p 8443:8443 -p 8444:8444 -p 6443:6443 --env-file env.list --hostname pce-container.illumio.consulting --name pce ansred/illumio-docker-pce-amd64
-
+```
 
 
 ## How can i access my PCE from the commandline?
 
 SSH to the docker host and make sure the pce container is running, you can run command: (docker ps -a | grep pce)
 Execute the following command:
-
+```
   docker run -it pce bash
-
+```
 
 
 ## How can i copy files to my PCE?
-
+```
   docker cp <filename> pce:/some/path
-
+```
 
 
 
@@ -150,11 +150,14 @@ The Dockerfile uses three files to do the PCE bootstrapping:
 
 
 # Build the image out of the Dockerfile
+```
 docker build -t ansred/illumio-docker-pce-amd64 . --no-cache=true --platform=linux/amd64
+```
 
 # Push the iamge to a private dockerhub registry if you wish (use Docker login command first)
+```
 docker push ansred/illumio-docker-pce-amd64
-
+```
 
 
 
