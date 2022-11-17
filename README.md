@@ -71,7 +71,9 @@ PCE works without it and should be running fine without using privileged.
 
 
 * Single line
+```
 docker run --privileged -it -d -p 8443:8443 -p 8444:8444 -p 6443:6443 -e PCE_FQDN="pce-container.illumio.consulting" -e PCE_SERVICE_DISCOVERY_FQDN="pce-container.illumio.consulting" -e PCE_EMAIL_ADDRESS="anas.hamra@illumio.com" -e PCE_FULLNAME="Anas Hamra" -e PCE_PASSWORD="Illuminated1" -e PCE_ORG_NAME=Illumio --hostname pce-container.illumio.consulting --name pce ansred/illumio-docker-pce-amd64
+```
 
 * Multiple lines:
 ```
