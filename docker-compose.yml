@@ -1,0 +1,27 @@
+##############################################################################################
+version: '3'
+
+services:
+  pce:
+    image: ansred/illumio-docker-pce-amd64
+    hostname: pce.illumio.consulting
+    privileged: true
+    environment:
+      PCE_FQDN: "pce.illumio.consulting"
+      PCE_SERVICE_DISCOVERY_FQDN: "pce.illumio.consulting"
+      PCE_EMAIL_ADDRESS: "adm.pce@illumio.consulting"
+      PCE_FULLNAME: "Anas Hamra"
+      PCE_PASSWORD: "IlluIlluminated1"
+      PCE_ORG_NAME: "Illumio"
+    ports:
+      - "8443:8443"
+      - "8444:8444"
+      - "6443:6443"
+    container_name: pce
+
+
+networks: # Optionl, you can remove it, and it will create _default network as bridge
+    default:
+      external:
+        name: Projects_Networks
+##############################################################################################
